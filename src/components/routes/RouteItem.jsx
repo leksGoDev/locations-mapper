@@ -1,18 +1,16 @@
 export default function RouteItem(props){
     const styles = {
-        li:{
-            display: 'list-item',
-            listStyle: 'outside url("logo-location.svg")',
-            fontSize: '1.15em',
-            '& li::marker': {
-                textTransform: 'uppercase'
-            }
-        },
-        span:{
+        div:{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             lineHeight: '1.5'
+        },
+        img:{
+            width: '0.8em',
+            height: '0.8em',
+            verticalAlign: 'middle',
+            marginRight: '0.2em'
         },
         button:{
             backgroundColor: '#D9372C',
@@ -22,10 +20,19 @@ export default function RouteItem(props){
             transform: 'scale(0.5)'
         }
     }
-    return <li style={styles.li}>
-        <span style={styles.span}>
-            {props.value}
-            <button type="reset" style={styles.button}>&times;</button>
-        </span>
+    return <li style={{fontSize: '1.15em'}}>
+        <div style={styles.div}>
+            <span>
+                <img src={'logo-location.svg'}
+                     alt='logo'
+                     style={styles.img}/>
+                {props.index}: {props.value}
+            </span>
+            <button type="reset"
+                    style={styles.button}
+                    onClick={props.onRemoveClick}>
+                &times;
+            </button>
+        </div>
     </li>
 }

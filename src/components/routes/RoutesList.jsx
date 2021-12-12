@@ -1,13 +1,11 @@
 import RouteItem from "./RouteItem";
 
-export default function RoutesList(){
-    const routes = [{
-        id: 0,
-        value: 'Коллонтай, 43'
-    },{
-        id: 1,
-        value: 'Тамбасова, 10'
-    }]
-
-    return<ul>{routes.map(route =><RouteItem key={route.id} value={route.value}/>)}</ul>
+export default function RoutesList(props){
+    return<ul>{props.routes.map(route =>
+        <RouteItem key={route.id}
+                   value={route.value}
+                   index={route.id + 1}
+                   onRemoveClick={props.onRemoveClick.bind(null, route.id)}
+        />)}
+    </ul>
 }

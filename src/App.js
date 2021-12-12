@@ -1,6 +1,5 @@
 import './App.css'
-import RoutesCreator from "./components/routes/RoutesCreator"
-import RoutesList from "./components/routes/RoutesList"
+import RoutesMain from "./components/routes/RoutesMain";
 export default function App() {
     return (
         <div className="container">
@@ -8,8 +7,7 @@ export default function App() {
                 <header>My router</header>
                 <main className="main-content">
                     <section className="routes">
-                        <RoutesCreator/>
-                        <RoutesList/>
+                        <RoutesMain/>
                     </section>
                     <section className="map">Map</section>
                 </main>
