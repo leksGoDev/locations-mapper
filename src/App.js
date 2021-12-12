@@ -1,15 +1,20 @@
 import './App.css'
+import RoutesCreator from "./components/routes/RoutesCreator"
+import RoutesList from "./components/routes/RoutesList"
 export default function App() {
     return (
-        <div className="wrapper">
-            <div className="container">
+        <div className="container">
+            <div className="wrapper">
                 <header>My router</header>
-                <div className="content">
-                    <div>Routes</div>
-                    <div>Map</div>
-                </div>
+                <main className="main-content">
+                    <section className="routes">
+                        <RoutesCreator/>
+                        <RoutesList/>
+                    </section>
+                    <section className="map">Map</section>
+                </main>
                 <footer>by leksGo</footer>
             </div>
-    </div>
-  );
+        </div>
+  )
 }
