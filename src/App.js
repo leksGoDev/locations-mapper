@@ -1,5 +1,6 @@
 import './App.css'
 import RoutesMain from "./components/routes/RoutesMain";
+import MyMap from "./components/map/MyMap";
 export default function App() {
     return (
         <div className="container">
@@ -9,7 +10,9 @@ export default function App() {
                     <section className="routes">
                         <RoutesMain/>
                     </section>
-                    <section className="map">Map</section>
+                    <section className="map">
+                        <MyMap/>
+                    </section>
                 </main>
                 <footer>by leksGo</footer>
             </div>
