@@ -28,9 +28,10 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit;}
 .main-content{
     flex: 1;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    width: 100%;
 }
-.routes{
+.locations{
 }
-.map{
+.mapper{
 }

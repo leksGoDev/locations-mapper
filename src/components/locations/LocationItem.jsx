@@ -1,4 +1,4 @@
-export default function RouteItem(props){
+export default function LocationItem(props){
     const styles = {
         div:{
             display: 'flex',
@@ -10,14 +10,16 @@ export default function RouteItem(props){
             width: '0.8em',
             height: '0.8em',
             verticalAlign: 'middle',
-            marginRight: '0.2em'
+            marginRight: '0.2em',
+            flex: '0 0 auto'
         },
         button:{
             backgroundColor: '#D9372C',
             border: '1px solid rgba(0, 0, 0, 0.7)',
             borderRadius: '50%',
             width: '17.2px',
-            transform: 'scale(0.5)'
+            transform: 'scale(0.5)',
+            flex: '0 0 auto'
         }
     }
     return <li style={{fontSize: '1.15em'}}>

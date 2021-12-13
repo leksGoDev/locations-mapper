@@ -1,5 +1,5 @@
-export default function EmptyRoutes(){
+export default function EmptyLocations(){
     return<span style={{fontVariant: 'small-caps', fontStyle: 'italic'}}>
-        No routes yet
+        No locations yet
     </span>
 }

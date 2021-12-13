@@ -1,17 +1,17 @@
-import './App.css'
-import RoutesMain from "./components/routes/RoutesMain";
-import MyMap from "./components/map/MyMap";
+import styles from './App.css'
+import LocationsMain from "./components/routes/LocationsMain";
+import Mapper from "./components/map/Mapper";
 export default function App() {
     return (
-        <div className="container">
-            <div className="wrapper">
-                <header>My router</header>
-                <main className="main-content">
-                    <section className="routes">
-                        <RoutesMain/>
+        <div className={styles.container}>
+            <div className={styles.wrapper}>
+                <header>Locations Mapper</header>
+                <main className={styles.mainContent}>
+                    <section className="locations">
+                        <LocationsMain/>
                     </section>
                     <section className="map">
-                        <MyMap/>
+                        <Mapper/>
                     </section>
                 </main>
                 <footer>by leksGo</footer>

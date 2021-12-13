@@ -1,4 +1,4 @@
-export default function RoutesCreator(props){
+export default function LocationsCreator(props){
     const style = {
         border: '0.15rem groove #2db232',
         borderRadius: '8%'
