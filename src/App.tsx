@@ -1,12 +1,13 @@
-import styles from './App.css'
-import LocationsMain from "./components/routes/LocationsMain";
-import Mapper from "./components/map/Mapper";
-export default function App() {
+import './App.css'
+import {LocationsMain} from "./components/locations/LocationsMain";
+import {Mapper} from "./components/map/Mapper";
+
+const App = () =>{
     return (
-        <div className={styles.container}>
-            <div className={styles.wrapper}>
+        <div className="container">
+            <div className="wrapper">
                 <header>Locations Mapper</header>
-                <main className={styles.mainContent}>
+                <main className="main-content">
                     <section className="locations">
                         <LocationsMain/>
                     </section>
@@ -19,3 +20,5 @@ export default function App() {
         </div>
   )
 }
+
+export {App}

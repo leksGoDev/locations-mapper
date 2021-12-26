@@ -1,6 +1,7 @@
+import React from "react";
 import {YMaps, Map} from "react-yandex-maps";
 
-export default function Mapper(){
+const Mapper: React.FC = () =>{
     const style = {
         border: '0.1rem groove black',
         borderRadius: '0.8%',
@@ -14,3 +15,5 @@ export default function Mapper(){
         </div>
     </YMaps>
 }
+
+export {Mapper}

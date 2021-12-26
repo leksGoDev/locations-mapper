@@ -1,4 +1,13 @@
-export default function LocationItem(props){
+import React from "react";
+import ILocation from "../ILocation";
+
+interface Props {
+    index: ILocation["index"]
+    value: ILocation["name"]
+    onRemoveClick: () => void
+}
+
+const LocationItem: React.FC<Props> = ({index, value, onRemoveClick}) =>{
     const styles = {
         div:{
             display: 'flex',
@@ -28,13 +37,15 @@ export default function LocationItem(props){
                 <img src={'logo-location.svg'}
                      alt='logo'
                      style={styles.img}/>
-                {props.index}: {props.value}
+                {index}: {value}
             </span>
             <button type="reset"
                     style={styles.button}
-                    onClick={props.onRemoveClick}>
+                    onClick={onRemoveClick}>
                 &times;
             </button>
         </div>
     </li>
 }
+
+export {LocationItem}
