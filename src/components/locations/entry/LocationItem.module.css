@@ -1,0 +1,22 @@
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 1.5;
+}
+.img{
+    width: 0.8em;
+    height: 0.8em;
+    vertical-align: middle;
+    margin-right: 0.2em;
+    flex: 0 0 auto;
+}
+.button{
+    background-color: #D9372C;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    transform: scale(0.5);
+    flex: 0 0 auto;
+}

@@ -15,7 +15,7 @@ const App = () =>{
                         <Mapper/>
                     </section>
                 </main>
-                <footer>by leksGo</footer>
+                <footer>leksGoDev</footer>
             </div>
         </div>
   )

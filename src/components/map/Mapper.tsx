@@ -1,14 +1,10 @@
 import React from "react";
 import {YMaps, Map} from "react-yandex-maps";
+import styles from "./Mapper.module.css"
 
 const Mapper: React.FC = () =>{
-    const style = {
-        border: '0.1rem groove black',
-        borderRadius: '0.8%',
-        marginLeft: '1rem'
-    }
     return<YMaps>
-        <div style={style}>
+        <div className={styles.container}>
             <Map defaultState={{ center: [55.75, 37.57], zoom: 9 }}>
 
             </Map>
