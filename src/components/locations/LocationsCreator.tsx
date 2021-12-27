@@ -4,10 +4,12 @@ interface Props{
     onAddClick: (text: string) => void
 }
 
-const LocationsCreator: React.FC<Props> = ({onAddClick}) => {
+export const LocationsCreator: React.FC<Props> = ({onAddClick}) => {
     const style = {
         border: '0.15rem groove #2db232',
-        borderRadius: '8%'
+        borderRadius: '8%',
+        marginLeft: 'auto',
+        display: 'block'
     }
     const searchKey = (e: React.KeyboardEvent<HTMLInputElement>) =>{
         if (e.key === "Enter"){
@@ -17,11 +19,9 @@ const LocationsCreator: React.FC<Props> = ({onAddClick}) => {
         }
     }
     return <input style={style}
-                  size={15}
+                  size={25}
                   type="text"
                   placeholder="enter address"
                   onKeyDown={(event)=>searchKey(event)}
     />
 }
-
-export {LocationsCreator}

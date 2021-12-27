@@ -1,14 +1,14 @@
 import React from "react";
 import {LocationItem} from "./entry/LocationItem";
 import {EmptyLocations} from "./entry/EmptyLocations"
-import ILocation from "./ILocation";
+import ILocation from "../ILocation";
 
 interface Props{
     locations: ILocation[]
     onRemoveClick: (index: ILocation["index"]) => void
 }
 
-const LocationsList: React.FC<Props> = ({locations, onRemoveClick}) => {
+export const LocationsList: React.FC<Props> = ({locations, onRemoveClick}) => {
     const renderLocations = ()=>{
         if (locations.length){
             return locations.map(locations =>
@@ -21,5 +21,3 @@ const LocationsList: React.FC<Props> = ({locations, onRemoveClick}) => {
     }
     return<ul>{renderLocations()}</ul>
 }
-
-export {LocationsList}

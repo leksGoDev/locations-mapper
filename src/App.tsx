@@ -1,6 +1,7 @@
 import './App.css'
-import {LocationsMain} from "./components/locations/LocationsMain";
+import {LocationsCore} from "./components/locations/LocationsCore";
 import {Mapper} from "./components/map/Mapper";
+import {LocationsProvider} from "./components/LocationsProvider";
 
 const App = () =>{
     return (
@@ -8,12 +9,14 @@ const App = () =>{
             <div className="wrapper">
                 <header>Locations Mapper</header>
                 <main className="main-content">
-                    <section className="locations">
-                        <LocationsMain/>
-                    </section>
-                    <section className="map">
-                        <Mapper/>
-                    </section>
+                    <LocationsProvider>
+                        <section className="section">
+                            <LocationsCore/>
+                        </section>
+                        <section className="section">
+                            <Mapper/>
+                        </section>
+                    </LocationsProvider>
                 </main>
                 <footer>leksGoDev</footer>
             </div>

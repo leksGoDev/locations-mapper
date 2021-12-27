@@ -1,8 +1,7 @@
 import React from "react";
-const EmptyLocations: React.FC = () => {
-    return<span style={{fontVariant: 'small-caps', fontStyle: 'italic'}}>
-        No locations yet
-    </span>
-}
 
-export {EmptyLocations}
+export const EmptyLocations: React.FC = () => {
+    return<div style={{fontVariant: 'small-caps', fontStyle: 'italic', textAlign: "center"}}>
+        No locations yet
+    </div>
+}

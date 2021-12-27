@@ -1,5 +1,5 @@
 import React from "react";
-import ILocation from "../ILocation";
+import ILocation from "../../ILocation";
 import styles from "./LocationItem.module.css"
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
     onRemoveClick: () => void
 }
 
-const LocationItem: React.FC<Props> = ({index, value, onRemoveClick}) =>{
+export const LocationItem: React.FC<Props> = ({index, value, onRemoveClick}) =>{
     return <li style={{fontSize: '1.15em'}}>
         <div className={styles.content}>
             <span>
@@ -25,5 +25,3 @@ const LocationItem: React.FC<Props> = ({index, value, onRemoveClick}) =>{
         </div>
     </li>
 }
-
-export {LocationItem}
