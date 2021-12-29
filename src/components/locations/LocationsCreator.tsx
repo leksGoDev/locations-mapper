@@ -19,9 +19,9 @@ export const LocationsCreator: React.FC<Props> = ({onAddClick}) => {
         }
     }
     return <input style={style}
-                  size={25}
+                  size={40}
                   type="text"
                   placeholder="enter address"
-                  onKeyDown={(event)=>searchKey(event)}
+                  onKeyDown={event => searchKey(event)}
     />
 }
