@@ -1,7 +1,7 @@
 import React from 'react';
 import ILocation from "./ILocation";
 
-interface Props{
+type Props = {
     children: React.ReactNode
 }
 interface Context{
@@ -21,7 +21,7 @@ export const LocationsContext = React.createContext<Context>({
 })
 
 export const LocationsProvider: React.FC<Props> = ({children}) => {
-    const initialState: ILocation[] = [{
+    const initialState: ILocation[] = [/*{
         id: 0,
         index: 1,
         name: 'Коллонтай, 43',
@@ -29,7 +29,7 @@ export const LocationsProvider: React.FC<Props> = ({children}) => {
         id: 1,
         index: 2,
         name: 'Тамбасова, 10'
-    }]
+    }*/]
     const [locations, setLocations] = React.useState<Array<ILocation>>(initialState)
 
     const handleAddLocation = (locationName: ILocation["name"]) =>{

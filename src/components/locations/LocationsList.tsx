@@ -1,9 +1,9 @@
-import React from "react";
-import {LocationItem} from "./entry/LocationItem";
+import React from "react"
+import {LocationItem} from "./entry/LocationItem"
 import {EmptyLocations} from "./entry/EmptyLocations"
-import ILocation from "../ILocation";
+import ILocation from "../ILocation"
 
-interface Props{
+type Props = {
     locations: ILocation[]
     onRemoveClick: (index: ILocation["index"]) => void
 }

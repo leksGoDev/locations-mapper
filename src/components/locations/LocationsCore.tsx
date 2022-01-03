@@ -1,8 +1,8 @@
-import React from "react";
-import {LocationsList} from "./LocationsList";
-import {LocationsCreator} from "./LocationsCreator";
-import ILocation from "../ILocation";
-import {Action, LocationsContext} from "../LocationsProvider";
+import React from "react"
+import {LocationsList} from "./LocationsList"
+import {LocationsCreator} from "./LocationsCreator"
+import ILocation from "../ILocation"
+import {Action, LocationsContext} from "../LocationsProvider"
 
 export const LocationsCore: React.FC = () => {
     const {locations, onChange} = React.useContext(LocationsContext)

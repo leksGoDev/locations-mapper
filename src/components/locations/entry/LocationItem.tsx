@@ -1,8 +1,8 @@
-import React from "react";
-import ILocation from "../../ILocation";
+import React from "react"
+import ILocation from "../../ILocation"
 import styles from "./LocationItem.module.css"
 
-interface Props {
+type Props = {
     index: ILocation["index"]
     value: ILocation["name"]
     onRemoveClick: () => void

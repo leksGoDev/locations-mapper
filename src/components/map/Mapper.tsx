@@ -1,65 +1,65 @@
-import React from "react";
-import {Map, YMaps, YMapsApi} from "react-yandex-maps";
+import React from "react"
+import {Map, Placemark, YMaps, YMapsApi} from "react-yandex-maps"
 import styles from "./Mapper.module.css"
-import {LocationsContext} from "../LocationsProvider";
-import {getInitPosition} from "./getInitPosition";
-import ILocation from "../ILocation";
+import {getInitPosition} from "./features/getInitPosition"
+import ILocation from "../ILocation"
 
 interface Mark{
     id: number
     address: ILocation["name"]
     coordinates: number[]
 }
+type Props = {
+    locations: ILocation[]
+}
 
-const Mapper: React.FC = () =>{
-    const [position, setPosition] = React.useState([59.950448, 30.316751])
-    const {locations} = React.useContext(LocationsContext)
+export const Mapper: React.FC<Props> = ({locations}) =>{
+    const yandexApiRef: YMapsApi= React.useRef()
+    const [homePosition, setHomePosition] = React.useState([59.950448, 30.316751])
     const [marks, setMarks] = React.useState<Array<Mark>>([])
+    const [opacity, setOpacity] = React.useState({opacity: 1})
 
     React.useEffect(()=>{
-        getInitPosition().then(position => setPosition([position.latitude, position.longitude]))
+        getInitPosition().then(position => setHomePosition([position.latitude, position.longitude]))
     },[])
+    React.useEffect(()=>{
+        setOpacity({opacity: 0.5})
+        changeMarks(yandexApiRef.current)
+    }, [locations.length])
 
-    const addMarks = (ymaps: YMapsApi) =>{
-        const additionalMarks: Promise<Mark>[] = locations.filter(location => {
+    const changeMarks = (yandexApi: YMapsApi)=>{
+        const addMarksPromises: Promise<Mark>[] = locations.filter(location => {
             for(let mark of marks)
                 if (location.name === mark.address) return false
             return true
         }).map(async (location) => {
-            const geocoder = await ymaps.geocode(location.name)
+            const geocoder = await yandexApi.geocode(location.name)
             return {
                 id: location.id,
                 address: location.name,
-                coordinates: geocoder.geoObjects.get(0).geometry.getCoordinates()
+                coordinates: geocoder.geoObjects.get(0)?.geometry.getCoordinates()
             }
         })
-        Promise.all(additionalMarks).then(addMarks => {
-            console.log(addMarks)
-            setMarks([...marks, ...addMarks])
+        Promise.all(addMarksPromises).then(additionalMarks => {
+            const updatedMarks = marks.filter(mark => {
+                for(let location of locations)
+                    if (mark.address === location.name) return true
+                return false
+            })
+            setMarks([...updatedMarks, ...additionalMarks])
+            setOpacity({opacity: 1})
         })
-    }
-    const deleteMarks = () =>{
-        const updatedMarks = marks.filter(mark => {
-            for(let location of locations)
-                if (mark.address === location.name) return true
-            return false
-        })
-        setMarks(updatedMarks)
-    }
-    const handleMapLoad = (ymaps: YMapsApi)=> {
-        if (marks.length) deleteMarks()
-        addMarks(ymaps)
     }
 
     return<YMaps query={{apikey: 'c4afe49a-01a4-4a8e-b77d-48f634e1e5c1', lang: 'ru_RU'}}>
-        <div className={styles.container}>
-            <Map modules={['geocode']} onLoad={ymaps => handleMapLoad(ymaps)}
+        <div style={opacity} className={styles.container}>
+            <Map modules={['geocode']} onLoad={api => yandexApiRef.current = api}
                  width={500} height={500}
-                 defaultState={{ center: position, zoom: 10}}>
+                 defaultState={{ center: homePosition, zoom: 10}}
 
+            >
+                {marks.map(mark => <Placemark key={mark.id} geometry={mark.coordinates}/>)}
             </Map>
         </div>
     </YMaps>
 }
-
-export {Mapper}

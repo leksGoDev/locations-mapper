@@ -1,7 +1,7 @@
 import './App.css'
-import {LocationsCore} from "./components/locations/LocationsCore";
-import {Mapper} from "./components/map/Mapper";
-import {LocationsProvider} from "./components/LocationsProvider";
+import {LocationsCore} from "./components/locations/LocationsCore"
+import {LocationsProvider} from "./components/LocationsProvider"
+import {MapperWrap} from "./components/map/MapperWrap"
 
 const App = () =>{
     return (
@@ -14,7 +14,7 @@ const App = () =>{
                             <LocationsCore/>
                         </section>
                         <section className="section">
-                            <Mapper/>
+                            <MapperWrap/>
                         </section>
                     </LocationsProvider>
                 </main>
