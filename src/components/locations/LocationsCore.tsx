@@ -1,7 +1,7 @@
 import React from "react"
 import {LocationsList} from "./LocationsList"
 import {LocationsCreator} from "./LocationsCreator"
-import ILocation from "../ILocation"
+import {ILocation} from "../LocationsProvider"
 import {Action, LocationsContext} from "../LocationsProvider"
 
 export const LocationsCore: React.FC = () => {

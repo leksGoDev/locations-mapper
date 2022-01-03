@@ -1,5 +1,5 @@
 import React from "react"
-import ILocation from "../../ILocation"
+import {ILocation} from "../../LocationsProvider"
 import styles from "./LocationItem.module.css"
 
 type Props = {

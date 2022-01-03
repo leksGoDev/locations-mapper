@@ -1,7 +1,7 @@
 import React from "react"
 import {LocationItem} from "./entry/LocationItem"
 import {EmptyLocations} from "./entry/EmptyLocations"
-import ILocation from "../ILocation"
+import {ILocation} from "../LocationsProvider"
 
 type Props = {
     locations: ILocation[]

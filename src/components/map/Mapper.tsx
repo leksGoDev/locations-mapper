@@ -1,10 +1,15 @@
 import React from "react"
 import {Map, Placemark, YMaps, YMapsApi} from "react-yandex-maps"
 import styles from "./Mapper.module.css"
-import {getInitPosition} from "./features/getInitPosition"
-import ILocation from "../ILocation"
+import {getInitCoords} from "./features/getInitCoords"
+import {ILocation} from "../LocationsProvider"
+import {calculatePosition} from "./features/calculatePosition";
 
-interface Mark{
+interface Position{
+    center: number[]
+    zoom: number
+}
+interface IMark{
     id: number
     address: ILocation["name"]
     coordinates: number[]
@@ -15,20 +20,23 @@ type Props = {
 
 export const Mapper: React.FC<Props> = ({locations}) =>{
     const yandexApiRef: YMapsApi= React.useRef()
-    const [homePosition, setHomePosition] = React.useState([59.950448, 30.316751])
-    const [marks, setMarks] = React.useState<Array<Mark>>([])
+    const [defaultCenter, setDefaultCenter] = React.useState([59.950448, 30.316751])
+    const [position, setPosition] = React.useState<Position|undefined>(undefined)
+    const [marks, setMarks] = React.useState<Array<IMark>>([])
     const [opacity, setOpacity] = React.useState({opacity: 1})
 
     React.useEffect(()=>{
-        getInitPosition().then(position => setHomePosition([position.latitude, position.longitude]))
+        getInitCoords().then(coords => setDefaultCenter([coords.latitude, coords.longitude]))
     },[])
     React.useEffect(()=>{
-        setOpacity({opacity: 0.5})
-        changeMarks(yandexApiRef.current)
+        if (locations.length){
+            setOpacity({opacity: 0.5})
+            changeMarks(yandexApiRef.current)
+        }
     }, [locations.length])
 
     const changeMarks = (yandexApi: YMapsApi)=>{
-        const addMarksPromises: Promise<Mark>[] = locations.filter(location => {
+        const addMarksPromises: Promise<IMark>[] = locations.filter(location => {
             for(let mark of marks)
                 if (location.name === mark.address) return false
             return true
@@ -46,7 +54,9 @@ export const Mapper: React.FC<Props> = ({locations}) =>{
                     if (mark.address === location.name) return true
                 return false
             })
-            setMarks([...updatedMarks, ...additionalMarks])
+            const newMarks = [...updatedMarks, ...additionalMarks]
+            setMarks(newMarks)
+            setPosition(calculatePosition(newMarks.map(mark => mark.coordinates)) as Position)
             setOpacity({opacity: 1})
         })
     }
@@ -55,8 +65,8 @@ export const Mapper: React.FC<Props> = ({locations}) =>{
         <div style={opacity} className={styles.container}>
             <Map modules={['geocode']} onLoad={api => yandexApiRef.current = api}
                  width={500} height={500}
-                 defaultState={{ center: homePosition, zoom: 10}}
-
+                 defaultState={{ center: defaultCenter, zoom: 10}}
+                 state={position}
             >
                 {marks.map(mark => <Placemark key={mark.id} geometry={mark.coordinates}/>)}
             </Map>

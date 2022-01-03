@@ -1,5 +1,4 @@
 import React from 'react';
-import ILocation from "./ILocation";
 
 type Props = {
     children: React.ReactNode
@@ -7,6 +6,11 @@ type Props = {
 interface Context{
     locations: ILocation[]
     onChange: (action: Action) => void
+}
+export interface ILocation {
+    id: number
+    index: number
+    name: string
 }
 export interface Action{
     type: string
