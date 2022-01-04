@@ -1,5 +1,5 @@
 import React from 'react'
-import {LocationsContext} from "../LocationsProvider";
+import {LocationsContext} from "../LocationsProvider"
 import {Mapper} from "./Mapper"
 
 export const MapperWrap: React.FC = () => {

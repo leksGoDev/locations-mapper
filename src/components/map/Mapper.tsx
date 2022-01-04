@@ -1,9 +1,8 @@
 import React from "react"
-import {Map, Placemark, YMaps, YMapsApi} from "react-yandex-maps"
+import {Map, Placemark, YMaps, YMapsApi, ZoomControl} from "react-yandex-maps"
 import styles from "./Mapper.module.css"
-import {getInitCoords} from "./features/getInitCoords"
 import {ILocation} from "../LocationsProvider"
-import {calculatePosition} from "./features/calculatePosition";
+import {calculatePosition, getInitCoords} from "./features/position"
 
 interface Position{
     center: number[]
@@ -29,11 +28,11 @@ export const Mapper: React.FC<Props> = ({locations}) =>{
         getInitCoords().then(coords => setDefaultCenter([coords.latitude, coords.longitude]))
     },[])
     React.useEffect(()=>{
-        if (locations.length){
+        if (locations.length !== marks.length){
             setOpacity({opacity: 0.5})
             changeMarks(yandexApiRef.current)
         }
-    }, [locations.length])
+    }, [locations])
 
     const changeMarks = (yandexApi: YMapsApi)=>{
         const addMarksPromises: Promise<IMark>[] = locations.filter(location => {
@@ -55,8 +54,9 @@ export const Mapper: React.FC<Props> = ({locations}) =>{
                 return false
             })
             const newMarks = [...updatedMarks, ...additionalMarks]
+            const newMarksCoords = newMarks.map(mark => mark.coordinates)
             setMarks(newMarks)
-            setPosition(calculatePosition(newMarks.map(mark => mark.coordinates)) as Position)
+            setPosition(calculatePosition(newMarksCoords, defaultCenter) as Position)
             setOpacity({opacity: 1})
         })
     }
@@ -65,10 +65,10 @@ export const Mapper: React.FC<Props> = ({locations}) =>{
         <div style={opacity} className={styles.container}>
             <Map modules={['geocode']} onLoad={api => yandexApiRef.current = api}
                  width={500} height={500}
-                 defaultState={{ center: defaultCenter, zoom: 10}}
-                 state={position}
-            >
+                 defaultState={{center: defaultCenter, zoom: 10}}
+                 state={position}>
                 {marks.map(mark => <Placemark key={mark.id} geometry={mark.coordinates}/>)}
+                <ZoomControl options={{position: {right: 10, top: 108}}}/>
             </Map>
         </div>
     </YMaps>

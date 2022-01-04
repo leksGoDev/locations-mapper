@@ -37,9 +37,14 @@ export const LocationsProvider: React.FC<Props> = ({children}) => {
     const [locations, setLocations] = React.useState<Array<ILocation>>(initialState)
 
     const handleAddLocation = (locationName: ILocation["name"]) =>{
-        const location: ILocation = {
-            id: locations.length,
-            index: locations.length + 1,
+        const length = locations.length
+        const location: ILocation = length?{
+            id: locations[length - 1].id + 1,
+            index: locations[length - 1].index + 1,
+            name: locationName
+        }: {
+            id: 0,
+            index: 1,
             name: locationName
         }
         const updatedLocations = locations.slice()
